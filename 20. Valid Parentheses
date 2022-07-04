@@ -1,17 +1,18 @@
 https://leetcode.com/problems/valid-parentheses/
 class Solution:
-    # @return a boolean
     def isValid(self, s):
-        stack = []
-        dict = {"]":"[", "}":"{", ")":"("}
-        for char in s:
-            if char in dict.values():
-                stack.append(char)
-            elif char in dict.keys():
-                if stack == [] or dict[char] != stack.pop():
+        stack=[]
+        dict={"}":"{", "]":"[", ")":"("}
+        for c in s:
+            if c in dict:
+                if stack and stack[-1]==dict[c]:
+                    stack.pop()
+                else:
                     return False
             else:
-                return False
-        return stack == []
+                stack.append(c)
+        return True if not stack else False
+        
+        
 
 
